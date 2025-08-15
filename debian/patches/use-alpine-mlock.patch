@@ -1,0 +1,15 @@
+Description: Use alpine-mlock
+Author: Santiago Vila <sanvila@debian.org>
+Bug-Debian: https://bugs.debian.org/1091777
+
+--- a/imap/src/osdep/unix/Makefile
++++ b/imap/src/osdep/unix/Makefile
+@@ -105,7 +105,7 @@
+ RSHPATH=/usr/ucb/rsh
+ MD5PWD=/etc/cram-md5.pwd
+ # Tries one of the test alternatives below if not specified.
+-LOCKPGM=
++LOCKPGM=/usr/bin/alpine-mlock
+ # Test alternatives if LOCKPGM not specified
+ LOCKPGM1=/usr/libexec/mlock
+ LOCKPGM2=/usr/sbin/mlock

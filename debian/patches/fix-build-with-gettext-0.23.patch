@@ -1,0 +1,14 @@
+Description: Fix build with gettext 0.23
+Author: Santiago Vila <sanvila@debian.org>
+
+--- a/configure.ac
++++ b/configure.ac
+@@ -58,7 +58,7 @@
+ 
+ dnl COMPILE-TIME OPTIONS
+ 
+-AM_GNU_GETTEXT_VERSION([0.16.1])
++AM_GNU_GETTEXT_REQUIRE_VERSION([0.21])
+ AM_GNU_GETTEXT([external])
+ 
+ dnl enable dmalloc per http://dmalloc.com

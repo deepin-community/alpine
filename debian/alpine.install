@@ -1,0 +1,4 @@
+usr/bin/alpine  usr/bin
+usr/bin/rpdump  usr/bin
+usr/bin/rpload  usr/bin
+usr/bin/alpine-mlock usr/bin

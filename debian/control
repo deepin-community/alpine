@@ -1,15 +1,72 @@
-Source: template-repository
-Section: unknown
+Source: alpine
+Section: mail
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Asheesh Laroia <asheesh@asheesh.org>
+Uploaders:
+ Luke Faraone <lfaraone@debian.org>,
+ Unit 193 <unit193@debian.org>
+Build-Depends:
+ aspell,
+ debhelper-compat (= 13),
+ libkrb5-dev,
+ libldap2-dev,
+ libncurses-dev,
+ libpam0g-dev,
+ libssl-dev
+Rules-Requires-Root: binary-targets
+Standards-Version: 4.7.2
+Vcs-Browser: https://salsa.debian.org/debian/alpine
+Vcs-Git: https://salsa.debian.org/debian/alpine.git
+Homepage: https://alpineapp.email/
 
-Package: template-repository
+Package: alpine
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: alpine-doc, sensible-utils
+Suggests: aspell, default-mta | mail-transport-agent
+Conflicts: pine
+Replaces: pine
+Description: Text-based email client, friendly for novices but powerful
+ Alpine is an upgrade of the well-known PINE email client.  Its name derives
+ from the use of the Apache License and its ties to PINE.
+ .
+ It features a full suite of support for mail protocols like IMAP and SMTP and
+ security protocols like TLS.  It uses curses for its interface.
+
+Package: alpine-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Suggests: alpine
+Description: Text-based email client's documentation
+ Alpine is an upgrade of the well-known PINE email client.  Its name derives
+ from the use of the Apache License and its ties to PINE.
+ .
+ This package stores documentation for alpine.
+
+Package: alpine-pico
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Section: editors
+Description: Simple text editor from Alpine, a text-based email client
+ "pico" is a simple but powerful text editor.  It was originally the pine
+ composer,  the editor used by the pine email client for writing email messages.
+ .
+ It has gained popularity since its initial use in that context and is now used
+ as a stand-alone editor by many users.
+ .
+ It is similar to but less powerful than GNU Nano, an editor created with the
+ pico interface when the pico license was non-free.
+
+Package: pilot
+Architecture: any
+Section: utils
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Simple file browser from Alpine, a text-based email client
+ "pilot" is a simple file browser from Alpine.  It is used in Alpine to
+ let the user select attachments.  As with (Al)pine, commands are displayed
+ at the bottom of the screen, and context-sensitive help is provided.
+ .
+ As a stand-alone program, it is useful as a basic file browser, filling the
+ same utility as programs like the midnight commander.

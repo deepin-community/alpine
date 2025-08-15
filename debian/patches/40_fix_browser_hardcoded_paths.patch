@@ -1,0 +1,74 @@
+Description: Fix hardcoded paths from /usr/bin/firefox to /usr/bin/sensible-browser.
+Author: Unit 193 <unit193@ubuntu.com>
+
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2015-05-01
+
+---
+ doc/tech-notes/config.html    |    8 ++++----
+ doc/tech-notes/tech-notes.txt |    8 ++++----
+ pith/pine.hlp                 |    4 ++--
+ 3 files changed, 10 insertions(+), 10 deletions(-)
+
+--- a/doc/tech-notes/config.html	2022-06-09 01:10:43.807740915 -0400
++++ b/doc/tech-notes/config.html	2022-06-09 01:10:43.787740985 -0400
+@@ -4227,16 +4227,16 @@
+ 
+ <BLOCKQUOTE>
+     <CODE>
+-    url-viewers=_TEST("test -n '$&#123;DISPLAY}'")_  /usr/local/bin/netscape,
+-		/usr/local/bin/lynx,
++    url-viewers=_TEST("test -n '$&#123;DISPLAY}'")_  /usr/bin/sensible-browser,
++		/usr/bin/lynx,
+ 		C:&#92;BIN&#92;NETSCAPE.BAT </CODE><BR>
+ </BLOCKQUOTE>
+ 
+ This example shows that for the first browser in the list to be used the
+ environment variable <CODE>DISPLAY</CODE> must be defined.
+-If it is, then the file <CODE>/usr/local/bin/netscape</CODE> must exist.
++If it is, then the file <CODE>/usr/bin/sensible-browser</CODE> must exist.
+ If either condition is not met, then the file
+-<CODE>/usr/local/bin/lynx</CODE> must exist.
++<CODE>/usr/bin/lynx</CODE> must exist.
+ If it doesn't, then the final path and file must
+ exist. Note that the last entry is a DOS/Windows path. This is one way
+ to support <EM>Alpine</EM> running on more than one architecture with the same
+--- a/doc/tech-notes/tech-notes.txt	2022-06-09 01:10:43.807740915 -0400
++++ b/doc/tech-notes/tech-notes.txt	2022-06-09 01:10:43.791740971 -0400
+@@ -4270,12 +4270,12 @@
+           relative to your home directory).
+           Now for an example:
+ 
+-     url-viewers=_TEST("test -n '${DISPLAY}'")_ /usr/local/bin/netscape,
+-     /usr/local/bin/lynx, C:\BIN\NETSCAPE.BAT
++     url-viewers=_TEST("test -n '${DISPLAY}'")_ /usr/bin/sensible-browser,
++     /usr/bin/lynx, C:\BIN\NETSCAPE.BAT
+           This example shows that for the first browser in the list to be
+           used the environment variable DISPLAY must be defined. If it is,
+-          then the file /usr/local/bin/netscape must exist. If either
+-          condition is not met, then the file /usr/local/bin/lynx must
++          then the file /usr/bin/sensible-browser must exist. If either
++          condition is not met, then the file /usr/bin/lynx must
+           exist. If it doesn't, then the final path and file must exist.
+           Note that the last entry is a DOS/Windows path. This is one way
+           to support _Alpine_ running on more than one architecture with
+--- a/pith/pine.hlp	2022-06-09 01:10:43.807740915 -0400
++++ b/pith/pine.hlp	2022-06-09 01:10:43.799740943 -0400
+@@ -28913,14 +28913,14 @@
+ <P>
+ So, here are some example entries:
+ <PRE>
+-url-viewers = _TEST(&quot;test -n '$&#123;DISPLAY}'&quot;)_  /usr/bin/firefox
++url-viewers = _TEST(&quot;test -n '$&#123;DISPLAY}'&quot;)_  /usr/bin/sensible-browser
+               &quot;/usr/bin/lynx _URL_&quot;
+               C:&#92;BIN&#92;FIREFOX.BAT
+ </PRE>
+ <P>
+ This example shows that for the first viewer in the list to be used
+ the environment variable &quot;DISPLAY&quot; must be defined.  If it
+-is, then the path and file &quot;/usr/bin/firefox&quot; must exist.
++is, then the path and file &quot;/usr/bin/sensible-browser&quot; must exist.
+ If neither condition is met,
+ then the path and file &quot;/usr/bin/lynx&quot; must exist.
+ If it does, then the &quot;_URL_&quot; token is replaced by the selected URL.
