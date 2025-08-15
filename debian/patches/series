@@ -1,0 +1,5 @@
+10_config2etc.patch
+10_alpine_1.10_spooldir.patch
+40_fix_browser_hardcoded_paths.patch
+fix-build-with-gettext-0.23.patch
+use-alpine-mlock.patch

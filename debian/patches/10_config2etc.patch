@@ -1,0 +1,54 @@
+Description: Updates code and manpage to move pine.conf from /usr/local/lib to /etc.
+Forwarded: not-needed
+
+---
+ doc/man1/alpine.1 |    6 +++---
+ pith/filter.c     |    6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+--- a/pith/filter.c	2022-06-09 01:10:33.467777255 -0400
++++ b/pith/filter.c	2022-06-09 01:10:33.415777438 -0400
+@@ -3144,7 +3144,7 @@
+ #endif
+ 
+ #ifndef SYSTEM_PINE_INFO_PATH
+-#define SYSTEM_PINE_INFO_PATH "/usr/local/lib/pine.info"
++#define SYSTEM_PINE_INFO_PATH "/etc/pine.info"
+ #endif
+ #define CHTML_VAR_EXPAND(S) (!strcmp(S, "PINE_INFO_PATH")   \
+ 			     ? SYSTEM_PINE_INFO_PATH : S)
+@@ -7771,7 +7771,7 @@
+ 		}
+ 		else if(!strcmp(s, "PINE_CONF_PATH")){
+ #if defined(_WINDOWS) || !defined(SYSTEM_PINERC)
+-		    p = "/usr/local/lib/pine.conf";
++		    p = "/etc/pine.conf";
+ #else
+ 		    p = SYSTEM_PINERC;
+ #endif
+@@ -7780,7 +7780,7 @@
+ #ifdef SYSTEM_PINERC_FIXED
+ 		    p = SYSTEM_PINERC_FIXED;
+ #else
+-		    p = "/usr/local/lib/pine.conf.fixed";
++		    p = "/etc/pine.conf.fixed";
+ #endif
+ 		}
+ 		else if(!strcmp(s, "PINE_INFO_PATH")){
+--- a/doc/man1/alpine.1	2022-06-09 01:10:33.467777255 -0400
++++ b/doc/man1/alpine.1	2022-06-09 01:10:33.415777438 -0400
+@@ -342,11 +342,11 @@
+ .br
+ /etc/mime.types	System-wide file ext. to MIME type mapping
+ .br
+-/usr/local/lib/pine.info	Local pointer to system administrator.
++/etc/pine.info	Local pointer to system administrator.
+ .br
+-/usr/local/lib/pine.conf	System-wide configuration file.
++/etc/pine.conf	System-wide configuration file.
+ .br
+-/usr/local/lib/pine.conf.fixed	 Non-overridable configuration file.
++/etc/pine.conf.fixed	 Non-overridable configuration file.
+ .br
+ ~/.alpine-smime/ca	Directory that contains Certificate Authority files.
+ .br

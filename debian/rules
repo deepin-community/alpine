@@ -1,4 +1,56 @@
 #!/usr/bin/make -f
+# debian/rules for alpine
+
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CFLAGS_MAINT_APPEND = -Wno-incompatible-pointer-types
+
+override_dh_auto_configure:
+	dh_auto_configure -- --with-system-pinerc=/etc/pine.conf \
+			     --with-system-fixed-pinerc=/etc/pinerc.fixed \
+			     --with-passfile=.pine-passfile \
+			     --with-smtp-msa=/usr/sbin/sendmail \
+			     --with-debug-level=0 \
+			     --with-date-stamp="$(shell LC_ALL=C date --utc -d @$(SOURCE_DATE_EPOCH))" \
+			     --with-host-stamp=debian \
+			     --without-tcl \
+			     --with-krb5 \
+			     --with-krb5-dir=/usr
+
+override_dh_auto_build:
+	# force cross compilers onto make as they are not propagated from configure
+	dh_auto_build --buildsystem=makefile
+	$(MAKE) -C imap/mlock
+
+override_dh_install-arch:
+	cp -p imap/mlock/mlock debian/tmp/usr/bin/alpine-mlock
+	dh_install --arch
+	# Rename pico to pico.alpine.
+	# alpine-pico.install puts this in the alpine-pico package.
+	mv debian/alpine-pico/usr/bin/pico debian/alpine-pico/usr/bin/pico.alpine
+
+override_dh_installdocs-indep:
+	dh_installdocs --indep
+	# Change /usr/local/ config paths to /etc
+	sed -i  -e s@/usr/local/lib/pine@/etc/pine@g \
+		-e s@/usr/local/pine@/etc/pine@g \
+		debian/alpine-doc/usr/share/doc/alpine/tech-notes/*
+
+override_dh_installman-arch:
+	dh_installman --arch
+	mv debian/alpine-pico/usr/share/man/man1/pico.1 debian/alpine-pico/usr/share/man/man1/pico.alpine.1
+
+override_dh_fixperms-arch:
+	dh_fixperms
+	chown root:mail debian/alpine/usr/bin/alpine-mlock
+	chmod 2755 debian/alpine/usr/bin/alpine-mlock
+
+override_dh_missing:
+	dh_missing --fail-missing
+
+override_dh_clean:
+	dh_clean -Xinclude/config.h.in~ -Xweb/cgi/alpine/2.0/img/cbn/msglist.gif.bak
 
 %:
-	dh $@
+	dh $@ --max-parallel=1
